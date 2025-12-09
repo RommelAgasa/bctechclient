@@ -91,7 +91,7 @@ export default function EmployeeFormModal({
                   value={formData.hireDate}
                   onChange={onInputChange}
                   required
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isEditMode}
                   className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-gray-600 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
               </div>

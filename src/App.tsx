@@ -3,7 +3,7 @@ import { Plus } from 'lucide-react';
 import EmployeeTable from "./components/EmployeeTable";
 import EmployeeFormModal from "./components/EmployeeFormModal";
 import DeleteConfirmationModal from "./components/DeleteConfirmationModal";
-import { employeeApi, type Employee} from "./hooks/employee";
+import { employeeApi, type Employee } from "./hooks/employee";
 
 export default function App() {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -102,6 +102,10 @@ export default function App() {
   };
 
   const handleEditClick = (employee: Employee) => {
+    // Convert date to yyyy-MM-dd format for date input
+    const dateObj = new Date(employee.hireDate);
+    const formattedDate = dateObj.toISOString().split('T')[0];
+
     setSelectedEmployee(employee);
     setIsEditMode(true);
     setFormData({
@@ -109,7 +113,7 @@ export default function App() {
       lastName: employee.lastName,
       position: employee.position,
       salary: employee.salary.toString(),
-      hireDate: employee.hireDate,
+      hireDate: formattedDate,
     });
     setFormModalOpen(true);
   };

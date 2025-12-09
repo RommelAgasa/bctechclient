@@ -9,6 +9,16 @@ interface Employee {
   hireDate: string;
 }
 
+// Helper function to format date
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+  });
+};
+
 // EmployeeTable Component
 export default function EmployeeTable({ employees, onEdit, onDelete }: {
   employees: Employee[];
@@ -31,7 +41,7 @@ export default function EmployeeTable({ employees, onEdit, onDelete }: {
         <div className="col-span-2 text-xs font-light text-gray-600">Last Name</div>
         <div className="col-span-2 text-xs font-light text-gray-600">Position</div>
         <div className="col-span-2 text-xs font-light text-gray-600">Salary</div>
-        <div className="col-span-1 text-xs font-light text-gray-600">Hired Date</div>
+        <div className="col-span-2 text-xs font-light text-gray-600">Hired Date</div>
       </div>
 
       {employees.map((emp, index) => (
@@ -40,8 +50,8 @@ export default function EmployeeTable({ employees, onEdit, onDelete }: {
           <div className="col-span-2 text-sm text-gray-800">{emp.firstName}</div>
           <div className="col-span-2 text-sm text-gray-800">{emp.lastName}</div>
           <div className="col-span-2 text-sm text-gray-800">{emp.position}</div>
-          <div className="col-span-2 text-sm text-gray-800">${emp.salary.toLocaleString()}</div>
-          <div className="col-span-1 text-sm text-gray-800">{emp.hireDate}</div>
+          <div className="col-span-2 text-sm text-gray-800">₱{emp.salary.toLocaleString()}</div>
+          <div className="col-span-2 text-sm text-gray-800">{formatDate(emp.hireDate)}</div>
           
           <div className="col-span-1 flex gap-3 justify-end">
             <button
